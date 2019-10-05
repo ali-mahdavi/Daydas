@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="product">
+            <h2><span jhiTranslate="daydasApp.product.detail.title">Product</span> {{product.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="daydasApp.product.title">Title</span></dt>
+                <dd>
+                    <span>{{product.title}}</span>
+                </dd>
+                <dt><span jhiTranslate="daydasApp.product.subtitle">Subtitle</span></dt>
+                <dd>
+                    <span>{{product.subtitle}}</span>
+                </dd>
+                <dt><span jhiTranslate="daydasApp.product.keywords">Keywords</span></dt>
+                <dd>
+                    <span>{{product.keywords}}</span>
+                </dd>
+                <dt><span jhiTranslate="daydasApp.product.description">Description</span></dt>
+                <dd>
+                    <span>{{product.description}}</span>
+                </dd>
+                <dt><span jhiTranslate="daydasApp.product.rating">Rating</span></dt>
+                <dd>
+                    <span>{{product.rating}}</span>
+                </dd>
+                <dt><span jhiTranslate="daydasApp.product.image">Image</span></dt>
+                <dd>
+                    <div *ngIf="product.image">
+                        <a (click)="openFile(product.imageContentType, product.image)">
+                            <img [src]="'data:' + product.imageContentType + ';base64,' + product.image" style="max-width: 100%;" alt="product image"/>
+                        </a>
+                        {{product.imageContentType}}, {{byteSize(product.image)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="daydasApp.product.dateAdded">Date Added</span></dt>
+                <dd>
+                    <span>{{product.dateAdded}}</span>
+                </dd>
+                <dt><span jhiTranslate="daydasApp.product.dateModified">Date Modified</span></dt>
+                <dd>
+                    <span>{{product.dateModified}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/product', product.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

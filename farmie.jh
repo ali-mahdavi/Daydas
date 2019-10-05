@@ -1,0 +1,46 @@
+
+//
+// An entity model for an online shop
+//
+
+enum CategoryStatus {
+    AVAILABLE, RESTRICTED, DISABLED
+}
+
+entity Category {
+    title String required,
+    sortOrder Integer,
+    dateAdded LocalDate,
+    dateModified LocalDate,
+    status CategoryStatus,
+    
+}
+
+
+entity Product {
+    title String required,
+    subtitle String,
+    keywords String,
+    description String,
+    rating Integer,
+     image ImageBlob,
+    dateAdded LocalDate,
+    dateModified LocalDate,
+    
+}
+
+relationship ManyToOne {
+Category{parentCategory} to Category
+}
+
+
+relationship ManyToMany {
+Category{product(title)} to Product{category}
+}
+
+
+paginate  Product, Category  with pagination
+
+paginate Product with infinite-scroll
+
+service Category, Product with serviceClass
